@@ -67,6 +67,11 @@ public class PlayerSmart extends AbstractPlayer
             {
                 bet = Math.max(status.pot * 2 / 3, status.minimum_raise);
             }
+            else  if ((figAll.getPokerFigure() >= Weights.DRILL))
+            {
+                bet = 10000;
+            }
+            
         }
 
         return bet;
