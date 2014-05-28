@@ -6,7 +6,7 @@ import org.leanpoker.player.json.GameStatusJson;
 
 public class PlayerBasic extends AbstractPlayer {
 
-    static final String VERSION = "Latte";
+    public final String VERSION = "Latte";
 
     @Override
     public int betRequest(GameStatusJson status) {
