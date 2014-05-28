@@ -25,5 +25,5 @@ public class GameStatusJson {
 
     public int in_action;
     public List<PlayerJson> players;
-    public List<PlayerJson> community_cards;
+    public List<CardJson> community_cards;
 }
