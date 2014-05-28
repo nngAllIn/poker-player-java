@@ -188,8 +188,9 @@ public class Weights
         int[] colors = new int[cards.size()];
         int ii = 0;
 
-        for (CardJson card : cards)
+        for (int jj = 0; jj < cards.size(); jj++)
         {
+            CardJson card = cards.get(jj);
             int rank = calcRank(card);
 
             ranks[rank] = ranks[rank] + 1;
@@ -228,17 +229,17 @@ public class Weights
 
                         case NOPARSED:
                             figure.setPokerFigure(PAIR);
-                            figure.setWeight(ii * PAIR);
+                            figure.setWeight((ii * PAIR) + MAXW_HIGH);
                             break;
 
                         case PAIR:
                             figure.setPokerFigure(PAIR_TWO);
-                            setWeightIfNeed(figure, ii * PAIR_TWO, ii);
+                            setWeightIfNeed(figure, (ii * PAIR_TWO) + MAXW_PAIR, ii);
                             break;
 
                         case (DRILL):
                             figure.setPokerFigure(FULL);
-                            setWeightIfNeed(figure, ii * FULL, ii);
+                            setWeightIfNeed(figure, (ii * FULL) + MAXW_FLUSH, ii);
                             break;
                     }
 
@@ -250,12 +251,12 @@ public class Weights
 
                         case NOPARSED:
                             figure.setPokerFigure(DRILL);
-                            setWeightIfNeed(figure, ii * DRILL, ii);
+                            setWeightIfNeed(figure, (ii * DRILL) + MAXW_PAIR_TWO, ii);
                             break;
 
                         case PAIR:
                             figure.setPokerFigure(FULL);
-                            setWeightIfNeed(figure, ii * FULL, ii);
+                            setWeightIfNeed(figure, (ii * FULL) + MAXW_FLUSH, ii);
                             break;
                     }
 
@@ -263,7 +264,7 @@ public class Weights
 
                 case 4:
                     figure.setPokerFigure(POKER);
-                    setWeightIfNeed(figure, ii * POKER, ii);
+                    setWeightIfNeed(figure, (ii * POKER) + MAXW_FULL, ii);
                     break;
             }
         }
@@ -284,12 +285,14 @@ public class Weights
 
             Arrays.sort(ranks);
             int straight = 0;
+            int multiplier = 0;
 
             for (int ii = 1; ii < ranks.length; ii++)
             {
                 if ((ranks[ii - 1] + 1) == ranks[ii])
                 {
                     straight++;
+                    multiplier = ranks[ii];
                 }
                 else
                 {
@@ -300,6 +303,8 @@ public class Weights
             if (straight >= 5)
             {
                 figure.setPokerFigure(STRAIGHT);
+                figure.setWeight((STRAIGHT * multiplier) + MAXW_DRILL);
+                figure.setRank(multiplier);
             }
         }
 
@@ -307,6 +312,7 @@ public class Weights
         {
             int flush = 0;
             int prevSuit = SUIT_ERROR;
+            int maxRank = 0;
 
             for (int ii = 0; ii < colors.length; ii++)
             {
@@ -317,6 +323,12 @@ public class Weights
                 else
                 {
                     flush++;
+                    int aRank = calcRank(cards.get(ii));
+
+                    if (maxRank < aRank)
+                    {
+                        maxRank = aRank;
+                    }
                 }
 
                 prevSuit = colors[ii];
@@ -325,6 +337,7 @@ public class Weights
             if (flush >= 5)
             {
                 figure.setPokerFigure(FLUSH);
+                figure.setWeight((FLUSH * maxRank) + MAXW_STRAIGHT);
             }
         }
 
