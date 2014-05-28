@@ -16,7 +16,10 @@ public abstract class AbstractPlayer {
 
     public void showdown(GameStatusJson status) {
         try {
-            System.err.println("showdown:" + status.players.get(0).hole_cards == null ? -1 : status.players.get(0).hole_cards.size());
+            System.err.println("showdown:" //
+                    + status.players.get(0).hole_cards == null //
+                    ? -1 //
+                    : status.players.get(0).hole_cards.size()); 
         } catch (Exception e) {
         }
     };
