@@ -20,7 +20,7 @@ public class PlayerServlet extends HttpServlet
     static AbstractPlayer playerBasic = new PlayerBasic();
     static AbstractPlayer playerMuzso = new Player();
     static AbstractPlayer playerSmart = new PlayerSmart();
-    static AbstractPlayer[] players = new AbstractPlayer[] {   /*playerBasic,*/playerMuzso, playerSmart };
+    static AbstractPlayer[] players = new AbstractPlayer[] {   /*playerBasic,*/playerMuzso, playerSmart, new PlayerSvo() };
     static AbstractPlayer player = playerSmart;
 
     static
