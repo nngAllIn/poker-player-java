@@ -44,7 +44,7 @@ public class PlayerSmart extends AbstractPlayer
 //        } else {
 //            return 0;
 //        }
-        int bet = 0;
+        int bet = 100;
 
         if (status.getPhase().ordinal() == Phase.PREFLOP.ordinal())
         {
