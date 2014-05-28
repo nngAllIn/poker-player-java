@@ -14,8 +14,9 @@ import java.util.List;
 
 public class Player extends AbstractPlayer
 {
-    static int betReqCount = 0;
+    static int round = 0;
     public final String VERSION = "Nespresso India";
+    int betReqCount = 0;
 
     @Override public String getVersion()
     {
@@ -24,16 +25,22 @@ public class Player extends AbstractPlayer
 
     @Override public int betRequest(GameStatusJson status)
     {
+        if (betReqCount == 0)
+        {
+            round++;
+        }
+
         betReqCount++;
-        int bet = status.minimum_raise;
+        int bet = status.current_buy_in - status.players.get(status.in_action).bet;
         Double rank = myRanking(status);
         Double highBet = Math.ceil(status.minimum_raise
-                  + (new Double(status.players.get(status.in_action).stack - status.minimum_raise) * (rank + 0.2)));
+                  + (new Double(status.players.get(status.in_action).stack - status.minimum_raise) * rank));
 
-        log("RR, R " + rank + ", B " + bet + ", HB " + highBet.intValue());
-        if (((betReqCount < 4) || (rank.compareTo(0.0) > 0))
+        log("RR, # " + round + "/" + betReqCount + ", mr " + status.minimum_raise + ", R " + rank + ", B " + bet + ", HB "
+              + highBet.intValue());
+        if (((betReqCount < 3) || (rank.compareTo(0.0) > 0))
               && ((status.current_buy_in - status.players.get(status.in_action).bet) < (status.players.get(status.in_action).stack / 2))
-              && (highBet > bet))
+              && (highBet > status.minimum_raise))
         {
             bet = status.current_buy_in - status.players.get(status.in_action).bet + highBet.intValue();
         }
@@ -92,7 +99,7 @@ public class Player extends AbstractPlayer
             suitCount.put(card.suit, count);
         }
 
-        log("RC " + maxRankCount + ", SC " + maxSuitCount + ", B " + betReqCount + ", P " + status.pot);
+        log("RC " + maxRankCount + ", SC " + maxSuitCount + ", P " + status.pot);
 
         // 0 <= rank <= 14
         return (maxRankCount + maxSuitCount) / 14;
