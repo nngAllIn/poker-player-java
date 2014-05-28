@@ -21,6 +21,4 @@ public class CardJson
         this.rank = rank;
         this.suit = suit;
     }
-    
-    
 }
