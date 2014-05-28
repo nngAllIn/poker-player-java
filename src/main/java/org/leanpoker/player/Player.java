@@ -25,24 +25,20 @@ public class Player extends AbstractPlayer
     @Override public int betRequest(GameStatusJson status)
     {
         betReqCount++;
-
-        //List<CardJson> cards = status.players.get(status.in_action).hole_cards;
+        int bet = status.minimum_raise;
         Double rank = myRanking(status);
+        Double highBet = Math.ceil(status.minimum_raise
+                  + (new Double(status.players.get(status.in_action).stack - status.minimum_raise) * (rank + 0.2)));
 
+        log("RR, R " + rank + ", B " + bet + ", HB " + highBet.intValue());
         if (((betReqCount < 4) || (rank.compareTo(0.0) > 0))
-              && ((status.current_buy_in - status.players.get(status.in_action).bet) < (status.players.get(status.in_action).stack / 2)))
+              && ((status.current_buy_in - status.players.get(status.in_action).bet) < (status.players.get(status.in_action).stack / 2))
+              && (highBet > bet))
         {
-            Double raise = Math.ceil(status.minimum_raise
-                      + (new Double(status.players.get(status.in_action).stack - status.minimum_raise) * rank));
-
-            log("RR, " + rank + ", " + raise);
-
-            return status.current_buy_in - status.players.get(status.in_action).bet + raise.intValue();
+            bet = status.current_buy_in - status.players.get(status.in_action).bet + highBet.intValue();
         }
-        else
-        {
-            return 0;
-        }
+
+        return bet;
     }
 
     private static void log(String msg)
