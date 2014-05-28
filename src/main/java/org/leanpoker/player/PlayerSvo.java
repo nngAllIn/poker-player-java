@@ -18,6 +18,9 @@ public class PlayerSvo extends AbstractPlayer {
 
     @Override
     public int betRequest(GameStatusJson status) {
+        if (status.getHandPair() > 11) {
+            return 5000;
+        }
         int out = 0;
         for (PlayerJson p : status.players) {
             if ("out".equals(p.status)) {
