@@ -175,13 +175,20 @@ public class Player extends AbstractPlayer
 
         if (maxSpecialRank > 0)
         {
-            if (drill != null)
+            if (maxSpecialRank >= 12)
             {
-                rank = 30 + maxSpecialRank;
+                rank = 10000;
             }
-            else if (pairs.size() > 0)
+            else
             {
-                rank = 20 + maxSpecialRank;
+                if (drill != null)
+                {
+                    rank = 30 + maxSpecialRank;
+                }
+                else if (pairs.size() > 0)
+                {
+                    rank = 20 + maxSpecialRank;
+                }
             }
         }
         else
