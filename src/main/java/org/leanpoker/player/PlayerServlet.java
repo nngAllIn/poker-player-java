@@ -29,7 +29,7 @@ public class PlayerServlet extends HttpServlet
         int idx = r.nextInt(players.length);
 
         System.err.println("AI, random player index: " + idx + ", player version: " + player.getVersion());
-        //player = players[idx];
+        player = players[idx];
     }
 
     @Override protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
