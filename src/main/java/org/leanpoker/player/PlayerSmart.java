@@ -64,6 +64,7 @@ public class PlayerSmart extends AbstractPlayer{
                 
                 bet = Math.max(status.pot *2/3, status.minimum_raise);
             }
+            
         }
         return bet;
     }
