@@ -34,11 +34,11 @@ public class Player extends AbstractPlayer
         int bet = status.current_buy_in - status.players.get(status.in_action).bet;
         Double rank = myRanking(status);
         Double highBet = Math.ceil(status.minimum_raise
-                  + (new Double(status.players.get(status.in_action).stack - status.minimum_raise) * (rank + 0.2)));
+                  + (new Double(status.players.get(status.in_action).stack - status.minimum_raise) * rank));
 
         log("RR, # " + round + "/" + betReqCount + ", mr " + status.minimum_raise + ", R " + rank + ", B " + bet + ", HB "
               + highBet.intValue());
-        if (((betReqCount < 4) || (rank.compareTo(0.0) > 0))
+        if (((betReqCount < 3) || (rank.compareTo(0.0) > 0))
               && ((status.current_buy_in - status.players.get(status.in_action).bet) < (status.players.get(status.in_action).stack / 2))
               && (highBet > status.minimum_raise))
         {
