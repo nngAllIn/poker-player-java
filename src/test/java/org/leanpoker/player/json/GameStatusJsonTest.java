@@ -6,6 +6,8 @@
 
 package org.leanpoker.player.json;
 
+import com.google.gson.Gson;
+import java.io.InputStreamReader;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -14,12 +16,14 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Ignore;
+import org.leanpoker.player.AbstractPlayer;
+import org.leanpoker.player.Player;
 
 /**
  *
  * @author isvorcz
  */
-@Ignore public class GameStatusJsonTest {
+public class GameStatusJsonTest {
     
     public GameStatusJsonTest() {
     }
@@ -34,6 +38,7 @@ import org.junit.Ignore;
     
     @Before
     public void setUp() {
+        
     }
     
     @After
@@ -44,71 +49,22 @@ import org.junit.Ignore;
      * Test of getPhase method, of class GameStatusJson.
      */
     @Test
-    public void testGetPhase() {
-        System.out.println("getPhase");
-        GameStatusJson instance = new GameStatusJson();
-        Phase expResult = null;
-        Phase result = instance.getPhase();
+    public void testMain() {
+        GameStatusJson fromJson = GameStatusReader.readJson("initial.json");
+        System.out.println("getPhase:");
+        Phase expResult = Phase.FLOP;
+        Phase result = fromJson.getPhase();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getMyCards method, of class GameStatusJson.
+     * Test of getPhase method, of class GameStatusJson.
      */
     @Test
-    public void testGetMyCards() {
-        System.out.println("getMyCards");
-        GameStatusJson instance = new GameStatusJson();
-        List<CardJson> expResult = null;
-        List<CardJson> result = instance.getMyCards();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testMuzso() {
+//        GameStatusJson fromJson = GameStatusReader.readJson("pair.json");
+//        System.out.println("testMuzso getPhase:"+fromJson.getPhase());
+//        AbstractPlayer player = new Player();
+//        System.out.println("bet:"+player.betRequest(fromJson));
     }
-
-    /**
-     * Test of getMyPlayer method, of class GameStatusJson.
-     */
-    @Test
-    public void testGetMyPlayer() {
-        System.out.println("getMyPlayer");
-        GameStatusJson instance = new GameStatusJson();
-        PlayerJson expResult = null;
-        PlayerJson result = instance.getMyPlayer();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getHandPair method, of class GameStatusJson.
-     */
-    @Test
-    public void testGetHandPair() {
-        System.out.println("getHandPair");
-        GameStatusJson instance = new GameStatusJson();
-        int expResult = 0;
-        int result = instance.getHandPair();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getCardRadRank method, of class GameStatusJson.
-     */
-    @Test
-    public void testGetCardRadRank() {
-        System.out.println("getCardRadRank");
-        CardJson card = null;
-        GameStatusJson instance = new GameStatusJson();
-        int expResult = 0;
-        int result = instance.getCardRadRank(card);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-    
 }
