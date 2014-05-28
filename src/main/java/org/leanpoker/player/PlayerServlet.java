@@ -28,6 +28,7 @@ public class PlayerServlet extends HttpServlet
         Random r = new Random();
         int idx = r.nextInt(players.length);
 
+        System.err.println("AI, random player index: " + idx + ", player version: " + player.getVersion());
         player = players[idx];
     }
 
@@ -38,7 +39,6 @@ public class PlayerServlet extends HttpServlet
 
     @Override protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
-        System.err.println("AI, version: " + player.getVersion());
         if (req.getParameter("action").equals("bet_request"))
         {
             String gameState = req.getParameter("game_state");
