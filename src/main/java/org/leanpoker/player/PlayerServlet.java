@@ -20,22 +20,22 @@ public class PlayerServlet extends HttpServlet
     static AbstractPlayer playerBasic = new PlayerBasic();
     static AbstractPlayer playerMuzso = new Player();
     static AbstractPlayer playerSmart = new PlayerSmart();
-    static AbstractPlayer[] players = new AbstractPlayer[] { playerBasic, playerMuzso, playerSmart };
+    static AbstractPlayer[] players = new AbstractPlayer[] { /*playerBasic,*/ playerMuzso, playerSmart };
     static AbstractPlayer player = playerSmart;
 
-//    static
-//    {
-//        Random r = new Random();
-//        int idx = r.nextInt();
-//
-//        if (idx < 0)
-//        {
-//            idx = idx * -1;
-//        }
-//
-//        idx = idx % players.length;
-//        player = players[idx];
-//    }
+    static
+    {
+        Random r = new Random();
+        int idx = r.nextInt();
+
+        if (idx < 0)
+        {
+            idx = idx * -1;
+        }
+
+        idx = idx % players.length;
+        player = players[idx];
+    }
 
     @Override protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
