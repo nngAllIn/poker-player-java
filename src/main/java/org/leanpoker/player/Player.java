@@ -36,18 +36,19 @@ public class Player extends AbstractPlayer
         Double highBet = Math.ceil(status.minimum_raise
                   + (new Double(status.players.get(status.in_action).stack - status.minimum_raise) * rank));
 
-        log("RR, # " + round + "/" + betReqCount + ", ccards: " + status.community_cards.size() + ", mr " + status.minimum_raise + ", R "
-              + rank + ", B " + bet + ", HB " + highBet.intValue());
         if (((betReqCount < 3) || (rank.compareTo(0.0) > 0))
               && ((status.current_buy_in - status.players.get(status.in_action).bet) < (status.players.get(status.in_action).stack / 2))
               && (highBet > status.minimum_raise))
         {
             bet = status.current_buy_in - status.players.get(status.in_action).bet + highBet.intValue();
         }
-        else if ((status.community_cards.size() >= 3) && (rank < 0.01))
+        else if ((status.community_cards.size() > 3) && (rank < 0.01))
         {
             bet = 0;
         }
+
+        log("RR, # " + round + "/" + betReqCount + ", ccards: " + status.community_cards.size() + ", mr " + status.minimum_raise + ", R "
+              + rank + ", B " + bet + ", HB " + highBet.intValue());
 
         return bet;
     }
@@ -106,6 +107,6 @@ public class Player extends AbstractPlayer
         log("RC " + maxRankCount + ", SC " + maxSuitCount + ", P " + status.pot);
 
         // 0 <= rank <= 14
-        return (maxRankCount + maxSuitCount) / 14;
+        return new Double(maxRankCount + maxSuitCount) / 14.0;
     }
 }
