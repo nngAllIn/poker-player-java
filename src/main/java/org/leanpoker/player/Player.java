@@ -15,7 +15,7 @@ public class Player {
     }
 
     public static int betRequest(GameStatusJson status) {
-        return status.current_buy_in - status.players.get(status.in_action).bet;
+        return status.current_buy_in - status.players.get(status.in_action).bet + status.minimum_raise;
     }
 
     public static void showdown(GameStatusJson status) {
