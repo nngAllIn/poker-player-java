@@ -4,26 +4,32 @@ import org.leanpoker.player.json.CardJson;
 import org.leanpoker.player.json.GameStatusJson;
 import org.leanpoker.player.json.PlayerJson;
 
+import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 
 public class Player
 {
-    static final String VERSION = "Nespresso";
+    static final String VERSION = "Nespresso ";
+    static int betReqCount = 0;
 
     public static int betRequest(GameStatusJson status)
     {
+        betReqCount++;
 
         //List<CardJson> cards = status.players.get(status.in_action).hole_cards;
         Double rank = myRanking(status);
 
-        if ((rank.compareTo(0.0) > 0)
+        if (((betReqCount < 4) || (rank.compareTo(0.0) > 0))
               && ((status.current_buy_in - status.players.get(status.in_action).bet) > (status.players.get(status.in_action).stack / 2)))
         {
             Double raise = Math.floor(new Double(status.players.get(status.in_action).stack - status.minimum_raise) * rank);
 
-            System.err.println("AI, " + rank + ", " + raise);
+            log("RR, " + rank + ", " + raise);
 
             return status.current_buy_in - status.players.get(status.in_action).bet + raise.intValue();
         }
@@ -35,6 +41,14 @@ public class Player
 
     public static void showdown(GameStatusJson status)
     {
+    }
+
+    private static void log(String msg)
+    {
+        Calendar cal = new GregorianCalendar();
+        SimpleDateFormat fmt = new SimpleDateFormat();
+
+        log("AI, " + fmt.format(cal.getTime()) + ", " + msg);
     }
 
     private static double myRanking(GameStatusJson status)
@@ -80,7 +94,7 @@ public class Player
             suitCount.put(card.suit, count);
         }
 
-        System.err.println("AI, " + maxRankCount + ", " + maxSuitCount);
+        log("RC " + maxRankCount + ", SC " + maxSuitCount);
 
         // 0 <= rank <= 14
         return (maxRankCount + maxSuitCount) / 14;
