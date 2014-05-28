@@ -12,12 +12,13 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 
-public class Player
+public class Player extends AbstractPlayer
 {
-    static final String VERSION = "Nespresso ";
+    public final String VERSION = "Nespresso Arabica";
     static int betReqCount = 0;
 
-    public static int betRequest(GameStatusJson status)
+    @Override
+    public int betRequest(GameStatusJson status)
     {
         betReqCount++;
 
@@ -39,7 +40,8 @@ public class Player
         }
     }
 
-    public static void showdown(GameStatusJson status)
+    @Override
+    public void showdown(GameStatusJson status)
     {
     }
 
