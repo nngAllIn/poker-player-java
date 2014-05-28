@@ -40,11 +40,6 @@ public class Player extends AbstractPlayer
         }
     }
 
-    @Override
-    public void showdown(GameStatusJson status)
-    {
-    }
-
     private static void log(String msg)
     {
         Calendar cal = new GregorianCalendar();
