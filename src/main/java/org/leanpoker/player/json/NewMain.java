@@ -6,7 +6,6 @@
 
 package org.leanpoker.player.json;
 
-import java.util.Random;
 import org.leanpoker.player.AbstractPlayer;
 import org.leanpoker.player.Player;
 
@@ -23,7 +22,7 @@ public class NewMain {
         GameStatusJson fromJson = GameStatusReader.readJson("pair.json");
         System.out.println("testMuzso getPhase:"+fromJson.getPhase());
         AbstractPlayer player = new Player();
-        System.out.println("bet:"+player.betRequest(fromJson));
+        System.out.println("bet:"+player.betRequest(fromJson)+":"+fromJson.getHandPair());
     }
     
 }

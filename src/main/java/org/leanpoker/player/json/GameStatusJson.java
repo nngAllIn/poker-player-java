@@ -79,4 +79,8 @@ public class GameStatusJson {
                 return 0;
         }
     }
+
+    public int call() {
+        return current_buy_in - getMyPlayer().bet;
+    }
 }

@@ -51,6 +51,8 @@ public class GameStatusJsonTest {
         Phase expResult = Phase.FLOP;
         Phase result = fromJson.getPhase();
         assertEquals(expResult, result);
+        fromJson = GameStatusReader.readJson("pair.json");
+        assertEquals(13, fromJson.getHandPair());
     }
 
     /**
