@@ -14,7 +14,7 @@ import java.util.List;
 
 public class Player extends AbstractPlayer
 {
-    public final String VERSION = "Nespresso Arabica";
+    public final String VERSION = "Nespresso India";
     static int betReqCount = 0;
 
     @Override
