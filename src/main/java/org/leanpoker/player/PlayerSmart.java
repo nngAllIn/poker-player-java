@@ -12,14 +12,14 @@ import org.leanpoker.player.json.GameStatusJson;
  *
  * @author KERiii
  */
-public class PlayerSmart extends AbstractPlayer{
-    
+public class PlayerSmart extends AbstractPlayer {
+
     static final String VERSION = "Starsky";
-        
+
     @Override
-           public int betRequest(GameStatusJson status) {
+    public int betRequest(GameStatusJson status) {
         List<CardJson> cards = status.players.get(status.in_action).hole_cards;
-        
+
         if (cards.get(0).rank.equals(cards.get(1).rank) && (status.current_buy_in - status.players.get(status.in_action).bet > status.players.get(status.in_action).stack / 2)) {
             return status.current_buy_in - status.players.get(status.in_action).bet + status.minimum_raise * 3;
         } else {
@@ -29,10 +29,12 @@ public class PlayerSmart extends AbstractPlayer{
 
     @Override
     public void showdown(GameStatusJson status) {
-        
-    }
-    
-    
 
-    
+    }
+
+    @Override
+    public String getVersion() {
+        return VERSION;
+    }
+
 }

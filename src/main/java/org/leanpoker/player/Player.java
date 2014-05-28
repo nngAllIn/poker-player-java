@@ -50,7 +50,7 @@ public class Player extends AbstractPlayer
         Calendar cal = new GregorianCalendar();
         SimpleDateFormat fmt = new SimpleDateFormat();
 
-        log("AI, " + fmt.format(cal.getTime()) + ", " + msg);
+        System.err.println("AI, " + fmt.format(cal.getTime()) + ", " + msg);
     }
 
     private static double myRanking(GameStatusJson status)
@@ -100,5 +100,10 @@ public class Player extends AbstractPlayer
 
         // 0 <= rank <= 14
         return (maxRankCount + maxSuitCount) / 14;
+    }
+
+    @Override
+    public String getVersion() {
+        return VERSION;
     }
 }
