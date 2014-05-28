@@ -71,6 +71,9 @@ public class PlayerSmart extends AbstractPlayer
             {
                 bet = 10000;
             }
+            else if(status.dealer == status.in_action){
+                return status.small_blind  * 6;
+            }
             
         }
 
