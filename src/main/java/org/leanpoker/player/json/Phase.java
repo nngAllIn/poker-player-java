@@ -11,7 +11,7 @@ package org.leanpoker.player.json;
  * @author isvorcz
  */
 public enum Phase {
-    PREFOLP,
+    PREFLOP,
     FLOP,
     RIVER,
     TURN,

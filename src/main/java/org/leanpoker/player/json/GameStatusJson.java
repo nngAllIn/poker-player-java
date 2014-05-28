@@ -28,7 +28,7 @@ public class GameStatusJson {
     public List<CardJson> community_cards;
 
     public Phase getPhase() {
-        return community_cards == null || community_cards.isEmpty() ? Phase.PREFOLP //
+        return community_cards == null || community_cards.isEmpty() ? Phase.PREFLOP //
                 : community_cards.size() == 3 ? Phase.FLOP //
                 : community_cards.size() == 4 ? Phase.RIVER : Phase.TURN; //
     }

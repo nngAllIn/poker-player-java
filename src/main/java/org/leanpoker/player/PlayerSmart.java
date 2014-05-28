@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.leanpoker.player.json.CardJson;
 import org.leanpoker.player.json.GameStatusJson;
+import org.leanpoker.player.json.Phase;
 import org.leanpoker.player.strategy.Figure;
 import org.leanpoker.player.strategy.Weights;
 
@@ -44,12 +45,24 @@ public class PlayerSmart extends AbstractPlayer{
 //        } else {
 //            return 0;
 //        }
+        int bet = 0;
         
-        if (figHand.getWeight()>=24  ){
-            return 10000;
-        } 
-        else   return 0;
+        if(status.getPhase().ordinal() == Phase.PREFLOP.ordinal()){
+            if (figHand.getWeight()>=20 ){
+                bet =  status.players.get(status.in_action).stack / 3;
+            } 
+            else if (figHand.getWeight()>=26 ){
+                bet =  status.players.get(status.in_action).stack;
+            }
         
+        }
+        else if (status.getPhase().ordinal() >= Phase.FLOP.ordinal()){
+            if((figAll.getWeight() - figTable.getWeight() > 10) && figAll.getFigure() > Weights.PAIR){
+                
+                bet = Math.max(status.pot *2/3, status.minimum_raise);
+            }
+        }
+        return bet;
     }
 
     @Override
