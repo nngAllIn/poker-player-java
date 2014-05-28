@@ -4,11 +4,19 @@ import org.leanpoker.player.json.GameStatusJson;
 
 public abstract class AbstractPlayer {
 
+    protected static GameData data = new GameData();
+    
+    public static class GameData {
+        GameStatusJson lastStatus;
+    }
+    
     public final String VERSION = "Nespresso";
 
     public abstract int betRequest(GameStatusJson status);
 
-    public abstract void showdown(GameStatusJson status);
+    public void showdown(GameStatusJson status) {
+        System.err.println("showdown:"+status.players.get(0).hole_cards == null ? -1 : status.players.get(0).hole_cards.size() );
+    };
 
-    
+    public abstract String getVersion();
 }

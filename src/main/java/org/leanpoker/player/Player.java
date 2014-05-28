@@ -40,11 +40,6 @@ public class Player extends AbstractPlayer
         }
     }
 
-    @Override
-    public void showdown(GameStatusJson status)
-    {
-    }
-
     private static void log(String msg)
     {
         Calendar cal = new GregorianCalendar();
@@ -100,5 +95,10 @@ public class Player extends AbstractPlayer
 
         // 0 <= rank <= 14
         return (maxRankCount + maxSuitCount) / 14;
+    }
+
+    @Override
+    public String getVersion() {
+        return VERSION;
     }
 }
