@@ -63,7 +63,7 @@ public class PlayerSmart extends AbstractPlayer
         }
         else if (status.getPhase().ordinal() >= Phase.FLOP.ordinal())
         {
-            if (((figAll.getWeight() - figTable.getWeight()) > 10) && (figAll.getPokerFigure() > Weights.PAIR))
+            if (((figAll.getWeight() - figTable.getWeight()) > 10) && (figAll.getPokerFigure() >= Weights.PAIR))
             {
                 bet = Math.max(status.pot * 2 / 3, status.minimum_raise);
             }
