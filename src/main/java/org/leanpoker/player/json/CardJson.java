@@ -12,5 +12,5 @@ package org.leanpoker.player.json;
 public class CardJson
 {
     public String rank;  // 2..10,J,Q,K,A
-    public String suit;  //COLOR
+    public String suit;  //COLOR: spades, hearts, clubs, diamonds
 }

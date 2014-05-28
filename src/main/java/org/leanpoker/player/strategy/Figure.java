@@ -11,7 +11,8 @@ import java.util.List;
 public class Figure
 {
     private List<CardJson> cards;
-    private int figure;
+    private int pokerFigure;
+    private int rank;  // a pair drill full poker dominans erteke
     private int weight;
 
     public List<CardJson> getCards()
@@ -24,14 +25,24 @@ public class Figure
         this.cards = cards;
     }
 
-    public int getFigure()
+    public int getPokerFigure()
     {
-        return figure;
+        return pokerFigure;
     }
 
-    public void setFigure(int figure)
+    public void setPokerFigure(int pokerFigure)
     {
-        this.figure = figure;
+        this.pokerFigure = pokerFigure;
+    }
+
+    public int getRank()
+    {
+        return rank;
+    }
+
+    public void setRank(int rank)
+    {
+        this.rank = rank;
     }
 
     public int getWeight()
