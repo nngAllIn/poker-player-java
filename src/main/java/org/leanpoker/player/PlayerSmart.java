@@ -48,7 +48,7 @@ public class PlayerSmart extends AbstractPlayer
 
         if (status.getPhase().ordinal() == Phase.PREFLOP.ordinal())
         {
-            if (figHand.getWeight() >= 20)
+            if (figHand.getWeight() >= 20 && figHand.getWeight() < 26)
             {
                 bet = status.players.get(status.in_action).stack / 3;
             }
