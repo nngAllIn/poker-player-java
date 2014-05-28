@@ -17,6 +17,7 @@ public class Player extends AbstractPlayer
     public final String VERSION = "Nespresso Arabica";
     static int betReqCount = 0;
 
+    @Override
     public int betRequest(GameStatusJson status)
     {
         betReqCount++;
@@ -39,6 +40,7 @@ public class Player extends AbstractPlayer
         }
     }
 
+    @Override
     public void showdown(GameStatusJson status)
     {
     }

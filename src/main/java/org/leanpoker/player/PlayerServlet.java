@@ -13,8 +13,9 @@ import org.leanpoker.player.json.GameStatusJson;
 @WebServlet("/")
 public class PlayerServlet extends HttpServlet {
 
-    PlayerBasic playerBasic = new PlayerBasic();
-    PlayerSmart playerSmart = new PlayerSmart();
+    AbstractPlayer playerMuzso = new Player();
+    AbstractPlayer playerBasic = new PlayerBasic();
+    AbstractPlayer playerSmart = new PlayerSmart();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -23,7 +24,7 @@ public class PlayerServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        AbstractPlayer player = playerSmart;
+        AbstractPlayer player = playerMuzso;
         if (req.getParameter("action").equals("bet_request")) {
             String gameState = req.getParameter("game_state");
             GameStatusJson status = new Gson().fromJson(gameState, GameStatusJson.class);
