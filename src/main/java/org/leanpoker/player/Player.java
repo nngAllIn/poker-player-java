@@ -26,7 +26,7 @@ public class Player extends AbstractPlayer
         Double rank = myRanking(status);
 
         if (((betReqCount < 4) || (rank.compareTo(0.0) > 0))
-              && ((status.current_buy_in - status.players.get(status.in_action).bet) > (status.players.get(status.in_action).stack / 2)))
+              && ((status.current_buy_in - status.players.get(status.in_action).bet) < (status.players.get(status.in_action).stack / 2)))
         {
             Double raise = Math.floor(new Double(status.players.get(status.in_action).stack - status.minimum_raise) * rank);
 
