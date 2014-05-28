@@ -6,9 +6,8 @@
 
 package org.leanpoker.player.json;
 
+import java.util.Random;
 import org.leanpoker.player.AbstractPlayer;
-import org.leanpoker.player.AbstractPlayer;
-import org.leanpoker.player.Player;
 import org.leanpoker.player.Player;
 
 /**
