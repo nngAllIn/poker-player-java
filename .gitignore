@@ -8,3 +8,4 @@ build
 .idea
 poker-player-java.iml
 /.nb-gradle/private/
+/bin
