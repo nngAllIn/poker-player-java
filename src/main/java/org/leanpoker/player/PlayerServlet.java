@@ -21,7 +21,7 @@ public class PlayerServlet extends HttpServlet
     static AbstractPlayer playerMuzso = new Player();
     static AbstractPlayer playerSmart = new PlayerSmart();
     static AbstractPlayer[] players = new AbstractPlayer[] {   /*playerBasic,*/playerMuzso, playerSmart, new PlayerSvo() };
-    static AbstractPlayer player = playerSmart;
+    static AbstractPlayer player = playerMuzso;
 
     static
     {
@@ -29,7 +29,7 @@ public class PlayerServlet extends HttpServlet
         int idx = r.nextInt(players.length);
 
         System.err.println("AI, random player index: " + idx + ", player version: " + player.getVersion());
-        player = players[idx];
+        //player = players[idx];
     }
 
     @Override protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
