@@ -26,4 +26,9 @@ public class GameStatusJson {
     public int in_action;
     public List<PlayerJson> players;
     public List<CardJson> community_cards;
+    public Phase getPhase() {
+        return community_cards == null || community_cards.isEmpty() ? Phase.PREFOLP //
+                : community_cards.size() == 3 ? Phase.FLOP  //
+                : community_cards.size() == 4 ? Phase.RIVER :Phase.TURN; //
+    }
 }
