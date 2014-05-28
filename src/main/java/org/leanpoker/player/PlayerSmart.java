@@ -45,7 +45,7 @@ public class PlayerSmart extends AbstractPlayer{
 //            return 0;
 //        }
         
-        if (figHand.getFigure()>= Weights.PAIR_TWO ){
+        if (figHand.getWeight()>=24  ){
             return 10000;
         } 
         else   return 0;
