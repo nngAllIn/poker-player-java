@@ -15,7 +15,10 @@ public abstract class AbstractPlayer {
     public abstract int betRequest(GameStatusJson status);
 
     public void showdown(GameStatusJson status) {
-        System.err.println("showdown:"+status.players.get(0).hole_cards == null ? -1 : status.players.get(0).hole_cards.size() );
+        try {
+            System.err.println("showdown:" + status.players.get(0).hole_cards == null ? -1 : status.players.get(0).hole_cards.size());
+        } catch (Exception e) {
+        }
     };
 
     public abstract String getVersion();
