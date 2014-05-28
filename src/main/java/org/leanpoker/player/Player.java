@@ -48,7 +48,7 @@ public class Player
         Calendar cal = new GregorianCalendar();
         SimpleDateFormat fmt = new SimpleDateFormat();
 
-        log("AI, " + fmt.format(cal.getTime()) + ", " + msg);
+        System.err.println("AI, " + fmt.format(cal.getTime()) + ", " + msg);
     }
 
     private static double myRanking(GameStatusJson status)
