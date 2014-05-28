@@ -6,16 +6,12 @@
 
 package org.leanpoker.player.json;
 
-import com.google.gson.Gson;
-import java.io.InputStreamReader;
-import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.junit.Ignore;
 import org.leanpoker.player.AbstractPlayer;
 import org.leanpoker.player.Player;
 
@@ -62,9 +58,9 @@ public class GameStatusJsonTest {
      */
     @Test
     public void testMuzso() {
-//        GameStatusJson fromJson = GameStatusReader.readJson("pair.json");
-//        System.out.println("testMuzso getPhase:"+fromJson.getPhase());
-//        AbstractPlayer player = new Player();
-//        System.out.println("bet:"+player.betRequest(fromJson));
+        GameStatusJson fromJson = GameStatusReader.readJson("pair.json");
+        System.out.println("testMuzso getPhase:"+fromJson.getPhase());
+        AbstractPlayer player = new Player();
+        System.out.println("bet:"+player.betRequest(fromJson));
     }
 }
