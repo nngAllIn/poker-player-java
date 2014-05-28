@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package org.leanpoker.player.json;
 
 /**
  *
  * @author isvorcz
  */
-public class CardJson {
-   public String rank;
-   public String suit;
+public class CardJson
+{
+    public String rank;  // 2..10,J,Q,K,A
+    public String suit;  //COLOR
 }
