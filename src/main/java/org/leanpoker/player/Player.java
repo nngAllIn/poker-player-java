@@ -19,6 +19,6 @@ public class Player {
     }
 
     public static void showdown(GameStatusJson status) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 }
