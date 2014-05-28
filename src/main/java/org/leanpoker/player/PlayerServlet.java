@@ -1,7 +1,6 @@
 package org.leanpoker.player;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonParser;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
