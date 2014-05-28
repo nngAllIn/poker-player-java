@@ -63,6 +63,8 @@ public class Weights
 
     public static void main(String[] args) throws Exception
     {
+        Weights weights = new Weights();
+
         System.out.println("MAXW_HIGH: " + MAXW_HIGH);
         System.out.println("MAXW_PAIR: " + MAXW_PAIR);
         System.out.println("MAXW_PAIR_TWO: " + MAXW_PAIR_TWO);
@@ -73,11 +75,21 @@ public class Weights
         System.out.println("MAXW_POKER: " + MAXW_POKER);
         System.out.println("MAXW_STRAIGHT_FLUSH: " + MAXW_STRAIGHT_FLUSH);
         System.out.println("MAXW_ROYAL_FLUSH: " + MAXW_ROYAL_FLUSH);
+        ArrayList<CardJson> THREE_FULL = new ArrayList<CardJson>();
+
+        THREE_FULL.add(new CardJson("3", "hearts"));
+        THREE_FULL.add(new CardJson("3", "spades"));
+        THREE_FULL.add(new CardJson("3", "diamonds"));
+
+        //THREE_FULL.add(new CardJson("6", "hearts"));
+        THREE_FULL.add(new CardJson("6", "diamonds"));
+        int tfw = weights.getFigure(THREE_FULL).getWeight();
+
+        System.out.println("three full weight: " + tfw);
         ArrayList<CardJson> KING_FIVE = new ArrayList<CardJson>();
 
         KING_FIVE.add(new CardJson("K", "diamonds"));
         KING_FIVE.add(new CardJson("5", "hearts"));
-        Weights weights = new Weights();
         int kfw = weights.getFigure(KING_FIVE).getWeight();
 
         System.out.println("King five weight: " + kfw);
@@ -193,6 +205,8 @@ public class Weights
     private Figure figure(List<CardJson> cards)
     {
         Figure result = newFigure();
+
+        result.setCards(cards);
         int[] ranks = new int[15];
         int[] colors = new int[cards.size()];
         int ii = 0;
