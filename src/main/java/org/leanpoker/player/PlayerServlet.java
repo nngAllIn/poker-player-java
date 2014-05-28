@@ -44,7 +44,7 @@ public class PlayerServlet extends HttpServlet
 
     @Override protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
-        System.err.println("AI, version: " + player.VERSION);
+        System.err.println("AI, version: " + player.getVersion());
         if (req.getParameter("action").equals("bet_request"))
         {
             String gameState = req.getParameter("game_state");
