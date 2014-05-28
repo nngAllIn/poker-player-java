@@ -2,6 +2,7 @@ package org.leanpoker.player.strategy;
 
 import org.leanpoker.player.json.CardJson;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -72,6 +73,14 @@ public class Weights
         System.out.println("MAXW_POKER: " + MAXW_POKER);
         System.out.println("MAXW_STRAIGHT_FLUSH: " + MAXW_STRAIGHT_FLUSH);
         System.out.println("MAXW_ROYAL_FLUSH: " + MAXW_ROYAL_FLUSH);
+        ArrayList<CardJson> KING_FIVE = new ArrayList<CardJson>();
+
+        KING_FIVE.add(new CardJson("K", "diamonds"));
+        KING_FIVE.add(new CardJson("5", "hearts"));
+        Weights weights = new Weights();
+        int kfw = weights.getFigure(KING_FIVE).getWeight();
+
+        System.out.println("King five weight: " + kfw);
     }
 
     public Figure getFigure(List<CardJson> cards)
@@ -215,7 +224,7 @@ public class Weights
             {
 
                 case 1:
-                    if (figure.getPokerFigure() == NOPARSED)
+                    if (figure.getPokerFigure() < PAIR)
                     {
                         figure.setPokerFigure(HIGH);
                         setWeightIfNeed(figure, ii * HIGH, ii);
