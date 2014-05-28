@@ -46,22 +46,16 @@ public class Player extends AbstractPlayer
             }
         }
 
-        if (activePlayerCount > 2)
+        boolean lessThanHalf = (status.current_buy_in - status.players.get(status.in_action).bet)
+              < (status.players.get(status.in_action).stack / 2);
+
+        if (((betReqCount < 3) || (rank.compareTo(0.0) > 0)) && lessThanHalf && (highBet > status.minimum_raise))
+        {
+            bet = status.current_buy_in - status.players.get(status.in_action).bet + highBet.intValue();
+        }
+        else if (!lessThanHalf && (rank < 0.2))
         {
             bet = 0;
-        }
-        else
-        {
-            if (((betReqCount < 3) || (rank.compareTo(0.0) > 0))
-                  //&& ((status.current_buy_in - status.players.get(status.in_action).bet) < (status.players.get(status.in_action).stack / 2))
-                  && (highBet > status.minimum_raise))
-            {
-                bet = status.current_buy_in - status.players.get(status.in_action).bet + highBet.intValue();
-            }
-            else if ((status.community_cards.size() > 3) && (rank < 0.01))
-            {
-                bet = 0;
-            }
         }
 
         log("RR, # " + round + "/" + betReqCount + ", ccards: " + status.community_cards.size() + ", mr " + status.minimum_raise + ", R "
