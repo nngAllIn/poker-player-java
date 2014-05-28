@@ -44,7 +44,7 @@ public class Player extends AbstractPlayer
         {
             bet = status.current_buy_in - status.players.get(status.in_action).bet + highBet.intValue();
         }
-        else if ((status.community_cards.size() == 3) && (rank < 0.01))
+        else if ((status.community_cards.size() >= 3) && (rank < 0.01))
         {
             bet = 0;
         }
