@@ -12,12 +12,13 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 
-public class Player
+public class Player extends AbstractPlayer
 {
-    static final String VERSION = "Nespresso ";
+    public final String VERSION = "Nespresso Arabica";
     static int betReqCount = 0;
 
-    public static int betRequest(GameStatusJson status)
+    @Override
+    public int betRequest(GameStatusJson status)
     {
         betReqCount++;
 
@@ -39,16 +40,12 @@ public class Player
         }
     }
 
-    public static void showdown(GameStatusJson status)
-    {
-    }
-
     private static void log(String msg)
     {
         Calendar cal = new GregorianCalendar();
         SimpleDateFormat fmt = new SimpleDateFormat();
 
-        log("AI, " + fmt.format(cal.getTime()) + ", " + msg);
+        System.err.println("AI, " + fmt.format(cal.getTime()) + ", " + msg);
     }
 
     private static double myRanking(GameStatusJson status)
@@ -98,5 +95,10 @@ public class Player
 
         // 0 <= rank <= 14
         return (maxRankCount + maxSuitCount) / 14;
+    }
+
+    @Override
+    public String getVersion() {
+        return VERSION;
     }
 }

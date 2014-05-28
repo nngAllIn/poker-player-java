@@ -68,6 +68,14 @@ public class Weights
         return result;
     }
 
+    private void setWeightIfNeed(Figure figure, int weight)
+    {
+        if (figure.getWeight() < weight)
+        {
+            figure.setWeight(weight);
+        }
+    }
+
     private int calcRank(CardJson card)
     {
         int result = 0;
@@ -166,17 +174,12 @@ public class Weights
 
                         case PAIR:
                             result.setFigure(PAIR_TWO);
-                            int w = ii * PAIR_TWO;
-
-                            if (result.getWeight() < w)
-                            {
-                                result.setWeight(w);
-                            }
-
+                            setWeightIfNeed(result, ii * PAIR_TWO);
                             break;
 
                         case (DRILL):
                             result.setFigure(FULL);
+                            setWeightIfNeed(result, ii * FULL);
                             break;
                     }
 
@@ -188,10 +191,12 @@ public class Weights
 
                         case NOPARSED:
                             result.setFigure(DRILL);
+                            setWeightIfNeed(result, ii * DRILL);
                             break;
 
                         case PAIR:
                             result.setFigure(FULL);
+                            setWeightIfNeed(result, ii * FULL);
                             break;
                     }
 
@@ -199,6 +204,7 @@ public class Weights
 
                 case 4:
                     result.setFigure(POKER);
+                    setWeightIfNeed(result, ii * POKER);
                     break;
             }
         }

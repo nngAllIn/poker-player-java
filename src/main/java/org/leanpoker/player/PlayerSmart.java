@@ -54,10 +54,12 @@ public class PlayerSmart extends AbstractPlayer{
 
     @Override
     public void showdown(GameStatusJson status) {
-        
-    }
-    
-    
 
-    
+    }
+
+    @Override
+    public String getVersion() {
+        return VERSION;
+    }
+
 }
