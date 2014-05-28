@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 public class Player extends AbstractPlayer
@@ -37,7 +38,7 @@ public class Player extends AbstractPlayer
                   + (new Double(status.players.get(status.in_action).stack - status.minimum_raise) * rank));
 
         if (((betReqCount < 3) || (rank.compareTo(0.0) > 0))
-              && ((status.current_buy_in - status.players.get(status.in_action).bet) < (status.players.get(status.in_action).stack / 2))
+              //&& ((status.current_buy_in - status.players.get(status.in_action).bet) < (status.players.get(status.in_action).stack / 2))
               && (highBet > status.minimum_raise))
         {
             bet = status.current_buy_in - status.players.get(status.in_action).bet + highBet.intValue();
@@ -51,6 +52,24 @@ public class Player extends AbstractPlayer
               + rank + ", B " + bet + ", HB " + highBet.intValue());
 
         return bet;
+    }
+
+    private static int getCardRank(String rank)
+    {
+        String[] ranks = new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A" };
+        int ret = 0;
+
+        for (int i = 0; i < ranks.length; i++)
+        {
+            if (ranks[i].equals(rank))
+            {
+                ret = i;
+
+                break;
+            }
+        }
+
+        return ret;
     }
 
     private static void log(String msg)
@@ -70,6 +89,10 @@ public class Player extends AbstractPlayer
         allCards.addAll(status.community_cards);
         HashMap<String, Integer> rankCount = new HashMap<String, Integer>();
         HashMap<String, Integer> suitCount = new HashMap<String, Integer>();
+        HashSet<String> pairs = new HashSet<String>();
+        String drill = null;
+        int maxRank = 0;
+        int maxSpecialRank = 0;
         int maxRankCount = 0;
         int maxSuitCount = 0;
 
@@ -82,8 +105,35 @@ public class Player extends AbstractPlayer
                 count = 0;
             }
 
+            int k = getCardRank(card.rank);
+
+            if (k > maxRank)
+            {
+                maxRank = k;
+            }
+
             count++;
             rankCount.put(card.rank, count);
+            if (count == 2)
+            {
+                if (k > maxSpecialRank)
+                {
+                    maxSpecialRank = k;
+                }
+
+                pairs.add(card.rank);
+            }
+            else if (count == 3)
+            {
+                if (k > maxSpecialRank)
+                {
+                    maxSpecialRank = k;
+                }
+
+                drill = card.rank;
+                pairs.remove(card.rank);
+            }
+
             if (count > maxRankCount)
             {
                 maxRankCount = count;
@@ -105,8 +155,25 @@ public class Player extends AbstractPlayer
         }
 
         log("RC " + maxRankCount + ", SC " + maxSuitCount + ", P " + status.pot);
+        int rank = 0;
+
+        if (maxSpecialRank > 0)
+        {
+            if (drill != null)
+            {
+                rank = 30 + maxSpecialRank;
+            }
+            else if (pairs.size() > 0)
+            {
+                rank = 20 + maxSpecialRank;
+            }
+        }
+        else
+        {
+            rank = maxRank;
+        }
 
         // 0 <= rank <= 14
-        return new Double(maxRankCount + maxSuitCount) / 14.0;
+        return new Double(rank) / 40;
     }
 }
