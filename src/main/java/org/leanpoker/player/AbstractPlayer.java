@@ -10,5 +10,5 @@ public abstract class AbstractPlayer {
 
     public abstract void showdown(GameStatusJson status);
 
-    
+    public abstract String getVersion();
 }

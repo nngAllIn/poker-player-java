@@ -101,4 +101,9 @@ public class Player extends AbstractPlayer
         // 0 <= rank <= 14
         return (maxRankCount + maxSuitCount) / 14;
     }
+
+    @Override
+    public String getVersion() {
+        return VERSION;
+    }
 }
