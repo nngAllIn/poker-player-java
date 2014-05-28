@@ -14,11 +14,15 @@ import java.util.List;
 
 public class Player extends AbstractPlayer
 {
-    public final String VERSION = "Nespresso India";
     static int betReqCount = 0;
+    public final String VERSION = "Nespresso India";
 
-    @Override
-    public int betRequest(GameStatusJson status)
+    @Override public String getVersion()
+    {
+        return VERSION;
+    }
+
+    @Override public int betRequest(GameStatusJson status)
     {
         betReqCount++;
 
@@ -91,14 +95,9 @@ public class Player extends AbstractPlayer
             suitCount.put(card.suit, count);
         }
 
-        log("RC " + maxRankCount + ", SC " + maxSuitCount);
+        log("RC " + maxRankCount + ", SC " + maxSuitCount + ", B " + betReqCount + ", P " + status.pot);
 
         // 0 <= rank <= 14
         return (maxRankCount + maxSuitCount) / 14;
-    }
-
-    @Override
-    public String getVersion() {
-        return VERSION;
     }
 }
