@@ -36,20 +36,36 @@ public class Player extends AbstractPlayer
         Double rank = myRanking(status);
         Double highBet = Math.ceil(status.minimum_raise
                   + (new Double(status.players.get(status.in_action).stack - status.minimum_raise) * rank));
+        int activePlayerCount = 0;
 
-        if (((betReqCount < 3) || (rank.compareTo(0.0) > 0))
-              //&& ((status.current_buy_in - status.players.get(status.in_action).bet) < (status.players.get(status.in_action).stack / 2))
-              && (highBet > status.minimum_raise))
+        for (PlayerJson player : status.players)
         {
-            bet = status.current_buy_in - status.players.get(status.in_action).bet + highBet.intValue();
+            if (!player.status.equalsIgnoreCase("out"))
+            {
+                activePlayerCount++;
+            }
         }
-        else if ((status.community_cards.size() > 3) && (rank < 0.01))
+
+        if (activePlayerCount > 2)
         {
             bet = 0;
         }
+        else
+        {
+            if (((betReqCount < 3) || (rank.compareTo(0.0) > 0))
+                  //&& ((status.current_buy_in - status.players.get(status.in_action).bet) < (status.players.get(status.in_action).stack / 2))
+                  && (highBet > status.minimum_raise))
+            {
+                bet = status.current_buy_in - status.players.get(status.in_action).bet + highBet.intValue();
+            }
+            else if ((status.community_cards.size() > 3) && (rank < 0.01))
+            {
+                bet = 0;
+            }
+        }
 
         log("RR, # " + round + "/" + betReqCount + ", ccards: " + status.community_cards.size() + ", mr " + status.minimum_raise + ", R "
-              + rank + ", B " + bet + ", HB " + highBet.intValue());
+              + rank + ", B " + bet + ", HB " + highBet.intValue() + ", a.p.c. " + activePlayerCount);
 
         return bet;
     }
