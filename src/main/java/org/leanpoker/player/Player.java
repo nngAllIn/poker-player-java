@@ -164,7 +164,7 @@ public class Player extends AbstractPlayer
             suitCount.put(card.suit, count);
         }
 
-        log("RC " + maxRankCount + ", SC " + maxSuitCount + ", P " + status.pot);
+        log("RC " + maxRankCount + ", SC " + maxSuitCount + ", P " + status.pot + ", SP " + maxSpecialRank + ", PAIRS " + pairs.size());
         int rank = 0;
 
         if (maxSpecialRank > 0)
@@ -177,11 +177,11 @@ public class Player extends AbstractPlayer
             {
                 if (drill != null)
                 {
-                    rank = 30 + maxSpecialRank;
+                    rank = 50 + maxSpecialRank;
                 }
                 else if (pairs.size() > 0)
                 {
-                    rank = 20 + maxSpecialRank;
+                    rank = 30 + maxSpecialRank;
                 }
             }
         }
@@ -191,6 +191,6 @@ public class Player extends AbstractPlayer
         }
 
         // 0 <= rank <= 14
-        return new Double(rank) / 40;
+        return new Double(rank) / 60;
     }
 }
