@@ -1,8 +1,7 @@
 package org.leanpoker.player;
 
 import com.google.gson.JsonElement;
-
-import java.util.Map;
+import org.leanpoker.player.json.GameStatusJson;
 
 public class Player {
 
@@ -13,5 +12,13 @@ public class Player {
     }
 
     public static void showdown(JsonElement game) {
+    }
+
+    public static int betRequest(GameStatusJson status) {
+        return status.current_buy_in - status.players.get(status.in_action).bet + status.minimum_raise;
+    }
+
+    public static void showdown(GameStatusJson status) {
+        
     }
 }
