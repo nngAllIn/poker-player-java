@@ -13,4 +13,14 @@ public class CardJson
 {
     public String rank;  // 2..10,J,Q,K,A
     public String suit;  //COLOR: spades, hearts, clubs, diamonds
+
+    public CardJson() {
+    }
+
+    public CardJson(String rank, String suit) {
+        this.rank = rank;
+        this.suit = suit;
+    }
+    
+    
 }
